@@ -12,7 +12,6 @@ import type {
 import { CORPORATIONS } from '../../core/data/corporations';
 import { INITIAL_REGIONS } from '../../core/data/regions';
 import { EVENT_CARDS, shuffleCards } from '../../core/data/eventCards';
-import { MONOPOLY_CARDS } from '../../core/data/monopolyCards';
 import { GameService } from '../../core/services/GameService';
 import { AIEngine } from '../../core/engines/AIEngine';
 
@@ -51,7 +50,6 @@ interface GameStore {
   selectAction: (actionType: ActionType, regionId?: RegionId, targetId?: string) => void;
   drawEventCard: () => void;
   resolveEventCard: (choiceIndex: 0 | 1) => void;
-  resolveMonopolyCard: () => void;
   endTurn: () => void;
   skipToNextPhase: () => void;
   dismissIncomeSummary: () => void;
@@ -72,7 +70,6 @@ export const useGameStore = create<GameStore>()(
 
       createGame: (config) => {
         const eventDeck = shuffleCards([...EVENT_CARDS]);
-        const monopolyDeck = shuffleCards([...MONOPOLY_CARDS]);
 
         const corporations: CorporationState[] = config.corporations.map((cc, i) => {
           const corpId = uuid();
@@ -114,11 +111,8 @@ export const useGameStore = create<GameStore>()(
           actionDeadline: Date.now() + 30000,
           regions: { ...INITIAL_REGIONS },
           eventDeck,
-          monopolyDeck,
           discardedEvents: [],
-          discardedMonopoly: [],
           activeEvent: null,
-          activeMonopoly: null,
           activePolicies: [],
           activeIncomeSummary: null,
           diceValue: null,
@@ -200,12 +194,7 @@ export const useGameStore = create<GameStore>()(
         });
       },
 
-      resolveMonopolyCard: () => {
-        set((state) => {
-          if (!state.game || state.game.status !== 'PLAYING') return state;
-          return { game: GameService.resolveMonopolyCard(state.game) };
-        });
-      },
+
 
       endTurn: () => {
         set((state) => {
@@ -270,12 +259,10 @@ export const useGameStore = create<GameStore>()(
           }
 
           const afterEvent = get().game;
-          if (afterEvent?.phase === 'RESOLVE_MONOPOLY') {
-            get().resolveMonopolyCard();
-            await delay(1500);
-          }
-
-          get().endTurn();
+          if (afterEvent?.phase === 'END_TURN') {
+            await delay(1000);
+            get().endTurn();
+          };
         };
 
         runAI();

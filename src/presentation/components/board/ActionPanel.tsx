@@ -10,7 +10,7 @@ interface ActionPanelProps {
 }
 
 export const ActionPanel: React.FC<ActionPanelProps> = ({ selectedRegion }) => {
-  const { game, selectAction, drawEventCard, endTurn, resolveMonopolyCard, skipToNextPhase } = useGameStore();
+  const { game, selectAction, drawEventCard, endTurn, skipToNextPhase } = useGameStore();
 
 
   if (!game) return null;

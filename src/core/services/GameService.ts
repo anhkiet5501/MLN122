@@ -1,7 +1,6 @@
 import type { GameState, ActionType, RegionId, TurnPhase, IncomeSummary, RegionIncomeLine } from '../domain/types';
 import { GameEngine } from '../engines/GameEngine';
 import { EventEngine } from '../engines/EventEngine';
-import { MonopolyEngine } from '../engines/MonopolyEngine';
 import { ScoringEngine } from '../engines/ScoringEngine';
 import { LogService } from './LogService';
 import { shuffleCards } from '../data/eventCards';
@@ -72,36 +71,6 @@ export class GameService {
   private static postResolveEvent(nextState: GameState, activeCorpId: string): GameState {
     return {
       ...nextState,
-      phase: 'END_TURN',
-    };
-  }
-
-  /**
-   * Resolves an active monopoly card.
-   */
-  static resolveMonopolyCard(state: GameState): GameState {
-    if (!this.isPlayable(state)) return this.checkGameOver(state);
-    if (!state.activeMonopoly) return state;
-
-    const activeCorpIndex = state.activeCorporationIndex;
-    const activeCorp = state.corporations[activeCorpIndex];
-    
-    const updatedCorp = MonopolyEngine.applyMonopolyEffect(activeCorp, state.activeMonopoly);
-
-    const updatedCorps = state.corporations.map((p, i) => 
-      i === activeCorpIndex ? updatedCorp : p
-    );
-
-    const newState = LogService.addLog(
-      { ...state, corporations: updatedCorps },
-      activeCorp.id,
-      `Nguy Cơ Độc Quyền: "${state.activeMonopoly.card.title}" — ${state.activeMonopoly.card.description}`,
-      'MONOPOLY'
-    );
-
-    return {
-      ...newState,
-      activeMonopoly: { ...state.activeMonopoly, resolved: true },
       phase: 'END_TURN',
     };
   }
@@ -206,7 +175,6 @@ export class GameService {
         phase: 'ROLL_DICE',
         diceValue: null,
         activeEvent: null,
-        activeMonopoly: null,
         activePolicies: nextPolicies,
         actionDeadline: Date.now() + (state.discussionTimer || 30) * 1000,
       };
@@ -236,7 +204,6 @@ export class GameService {
       phase: 'ROLL_DICE',
       diceValue: null,
       activeEvent: null,
-      activeMonopoly: null,
       activePolicies: nextPolicies,
       activeIncomeSummary,
       actionDeadline: Date.now() + (state.discussionTimer || 30) * 1000,

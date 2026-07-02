@@ -4,9 +4,8 @@ import type { LogEntry } from '../../../core/domain/types';
 
 const LOG_TYPE_STYLES: Record<string, { dot: string; text: string }> = {
   ACTION: { dot: '#3B82F6', text: 'text-[var(--vn-text)]' },
-  EVENT: { dot: '#A855F7', text: 'text-purple-300' },
-  MONOPOLY: { dot: '#E63946', text: 'text-red-400' },
-  SYSTEM: { dot: '#7B93B0', text: 'text-[var(--vn-muted)]' },
+  EVENT: { dot: '#A855F7', text: 'text-purple-400' },
+  SYSTEM: { dot: '#64748B', text: 'text-slate-400' },
   ACHIEVEMENT: { dot: '#F4D03F', text: 'text-[var(--vn-gold)]' },
 };
 

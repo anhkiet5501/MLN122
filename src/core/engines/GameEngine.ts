@@ -1,6 +1,6 @@
 import type { GameState, ActionType, RegionId } from '../domain/types';
 import { GAME_ACTIONS } from '../data/actions';
-import { getRegionByIndex } from '../data/regions';
+import { getRegionByIndex, REGION_ORDER } from '../data/regions';
 import { LogService } from '../services/LogService';
 import { v4 as uuid } from '../utils/uuid';
 
@@ -13,7 +13,7 @@ export class GameEngine {
 
     const activeCorpIndex = state.activeCorporationIndex;
     const activeCorp = state.corporations[activeCorpIndex];
-    const newPos = (activeCorp.position + diceValue) % 8; // REGION_ORDER.length = 8
+    const newPos = (activeCorp.position + diceValue) % REGION_ORDER.length;
     
     const updatedCorps = state.corporations.map((p, i) =>
       i === activeCorpIndex ? { ...p, position: newPos } : p

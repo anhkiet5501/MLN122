@@ -36,16 +36,15 @@ ${priorities}`;
   },
   {
     title: '🗺️ Bản Đồ Trò Chơi',
-    content: `Bản đồ đại diện cho Việt Nam, được chia thành 8 khu vực:
+    content: `Bản đồ đại diện cho Việt Nam, được chia thành 7 vùng kinh tế:
 
-• Hà Nội (Đô thị) — Doanh thu: $80, Sứ mệnh: 70
-• TP. Hồ Chí Minh (Đô thị) — Doanh thu: $100, Sứ mệnh: 60
-• Đà Nẵng (Duyên hải) — Doanh thu: $60, Sứ mệnh: 65
-• Đồng Bằng Sông Cửu Long (Nông thôn) — Doanh thu: $55, Sứ mệnh: 85
-• Tây Nguyên (Miền núi) — Doanh thu: $45, Sứ mệnh: 80
-• Núi Phía Bắc (Miền núi) — Doanh thu: $40, Sứ mệnh: 90
-• Duyên Hải (Duyên hải) — Doanh thu: $65, Sứ mệnh: 70
-• Biển Đảo (Hải đảo) — Doanh thu: $50, Sứ mệnh: 75
+• Đồng Bằng Sông Hồng (Đô thị) — Doanh thu: $100, Sứ mệnh: 60
+• Trung Du & Miền Núi Phía Bắc (Miền núi) — Doanh thu: $40, Sứ mệnh: 95
+• Bắc Trung Bộ (Duyên hải) — Doanh thu: $50, Sứ mệnh: 85
+• Nam Trung Bộ (Duyên hải) — Doanh thu: $60, Sứ mệnh: 70
+• Tây Nguyên (Miền núi) — Doanh thu: $35, Sứ mệnh: 90
+• Đông Nam Bộ (Đô thị) — Doanh thu: $120, Sứ mệnh: 50
+• Đồng Bằng Sông Cửu Long (Nông thôn) — Doanh thu: $55, Sứ mệnh: 80
 
 Sở hữu các khu vực để thu hoạch doanh thu và khẳng định lợi thế chiến thuật của mình.`,
   },
@@ -85,20 +84,6 @@ Ví dụ:
 • Khủng hoảng năng lượng: Ổn định giá cả (+15 Sứ Mệnh, -10 Hiệu Quả) HOẶC Định giá theo thị trường (+15 Hiệu Quả, -10 Sứ Mệnh)
 • Lũ lụt ở miền Trung: Hỗ trợ khẩn cấp (+25 Sứ Mệnh, -$25) HOẶC Không hỗ trợ (-20 Sứ Mệnh, +$10)
 • Đầu tư công nghệ: Đầu tư mạnh mẽ (+30 Hiệu Quả, -$30) HOẶC Trì hoãn (không ảnh hưởng)`,
-  },
-  {
-    title: '⚠️ Nguy Cơ Độc Quyền',
-    content: `Nếu bạn sở hữu TRÊN 40% số khu vực (nhiều hơn 3 trên 8 khu vực), bạn sẽ kích hoạt Thẻ Nguy Cơ Độc Quyền!
-
-Thẻ Nguy Cơ Độc Quyền mang lại những hậu quả bất lợi:
-• Phình to bộ máy: -15 Hiệu Quả
-• Thất thoát vốn: Mất 20% số Tiền hiện có
-• Điều tra tham nhũng: Mất lượt tiếp theo
-• Trì hoãn vận hành: Mọi hoạt động nâng cấp mất thêm 1 lượt
-• Làn sóng phản đối: -20 Điểm Sứ Mệnh
-• Và hơn thế nữa...
-
-Sở hữu quá nhiều khu vực trên bản đồ là điều nguy hiểm! Hãy tập trung vào các khu vực chiến lược, thay vì độc chiếm bản đồ.`,
   },
   {
     title: '🏆 Chiến Thắng',

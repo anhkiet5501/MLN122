@@ -64,7 +64,7 @@ export interface Region {
   description: string;
 }
 
-// ─── Event Card ──────────────────────────────────────────────
+// ─── Events & Interactions ──────────────────────────────────────────────
 export interface CardChoice {
   label: string;
   description: string;
@@ -80,23 +80,6 @@ export interface EventCard {
   category: 'ECONOMIC' | 'SOCIAL' | 'NATURAL' | 'POLITICAL' | 'TECHNOLOGY';
   icon: string;
   choices: [CardChoice, CardChoice];
-}
-
-// ─── Monopoly Risk Card ──────────────────────────────────────
-export type MonopolyEffect =
-  | { type: 'MONEY_DELTA'; value: number }
-  | { type: 'MONEY_PERCENT'; value: number }
-  | { type: 'MISSION_DELTA'; value: number }
-  | { type: 'EFFICIENCY_DELTA'; value: number }
-  | { type: 'SKIP_TURN'; value: number }
-  | { type: 'UPGRADE_DELAY'; value: number };
-
-export interface MonopolyCard {
-  id: string;
-  title: string;
-  description: string;
-  effect: MonopolyEffect;
-  icon: string;
 }
 
 // ─── Team Roles & KPIs ───────────────────────────────────────
@@ -154,7 +137,7 @@ export interface LogEntry {
   playerName: string;
   corporationId: CorporationId;
   message: string;
-  type: 'ACTION' | 'EVENT' | 'MONOPOLY' | 'SYSTEM' | 'ACHIEVEMENT';
+  type: 'ACTION' | 'EVENT' | 'SYSTEM' | 'ACHIEVEMENT';
   timestamp: number;
 }
 
@@ -197,11 +180,6 @@ export interface ActiveEvent {
   votingSession?: VotingSession;
 }
 
-export interface ActiveMonopoly {
-  card: MonopolyCard;
-  resolved: boolean;
-}
-
 // ─── Game State ──────────────────────────────────────────────
 export interface GameState {
   id: string;
@@ -216,11 +194,8 @@ export interface GameState {
   actionDeadline?: number;
   regions: Record<RegionId, Region>;
   eventDeck: EventCard[];
-  monopolyDeck: MonopolyCard[];
   discardedEvents: EventCard[];
-  discardedMonopoly: MonopolyCard[];
   activeEvent: ActiveEvent | null;
-  activeMonopoly: ActiveMonopoly | null;
   activePolicies: GovernmentPolicy[];
   activeIncomeSummary: IncomeSummary[] | null;
   diceValue: number | null;
