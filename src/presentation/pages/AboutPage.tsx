@@ -21,7 +21,7 @@ export const AboutPage: React.FC = () => {
           <Globe size={48} className="text-[var(--vn-red)] mx-auto mb-4" />
           <h1 className="text-4xl font-black text-white mb-3">Giới Thiệu Trò Chơi</h1>
           <p className="text-[var(--vn-muted)] text-base max-w-2xl mx-auto leading-relaxed">
-            Quốc Gia Cân Bằng là một trò chơi chiến thuật giáo dục được thiết kế để khám phá những
+            Cán cân Vĩ Mô là một trò chơi chiến thuật giáo dục được thiết kế để khám phá những
             thách thức phức tạp mà các Doanh nghiệp Nhà nước (SOE) Việt Nam phải đối mặt — những tổ chức phải
             đồng thời thực hiện sứ mệnh xã hội và đạt được hiệu quả kinh tế.
           </p>
@@ -59,7 +59,7 @@ export const AboutPage: React.FC = () => {
               <h2 className="text-white font-black text-base">Nhiệm Vụ Kép</h2>
             </div>
             <p className="text-[var(--vn-muted)] text-sm leading-relaxed">
-              Mâu thuẫn cốt lõi trong Quốc Gia Cân Bằng phản ánh việc quản lý SOE ngoài đời thực: làm thế nào để
+              Mâu thuẫn cốt lõi trong Cán cân Vĩ Mô phản ánh việc quản lý SOE ngoài đời thực: làm thế nào để
               tối đa hóa lợi nhuận VÀ hoàn thành nghĩa vụ xã hội?
             </p>
             <ul className="mt-3 space-y-2">
@@ -131,7 +131,7 @@ export const AboutPage: React.FC = () => {
           className="glass rounded-xl p-5 border border-[var(--vn-border)] text-center"
         >
           <p className="text-[var(--vn-muted)] text-xs leading-relaxed">
-            Quốc Gia Cân Bằng là một trò chơi mô phỏng mang tính giáo dục. Tất cả cơ chế, số liệu thống kê
+            Cán cân Vĩ Mô là một trò chơi mô phỏng mang tính giáo dục. Tất cả cơ chế, số liệu thống kê
             và kịch bản trong trò chơi đã được đơn giản hóa nhằm phục vụ mục đích học tập. Các tập đoàn
             được mô tả là các thực thể có thật; tuy nhiên toàn bộ khả năng và tình huống trong game là hư cấu
             và chỉ phục vụ cho trải nghiệm chơi game.

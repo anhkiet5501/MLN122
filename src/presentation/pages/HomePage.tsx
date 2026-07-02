@@ -44,7 +44,7 @@ export const HomePage: React.FC = () => {
           >
             <Globe size={40} className="text-white" />
           </motion.div>
-          <h1 className="text-4xl font-black text-white mb-2">Quốc Gia Cân Bằng</h1>
+          <h1 className="text-4xl font-black text-white mb-2">Cán cân Vĩ Mô</h1>
           <p className="text-[var(--vn-muted)]">Tham gia cuộc chơi kinh tế vĩ mô cùng bạn bè</p>
         </div>
 
@@ -52,7 +52,7 @@ export const HomePage: React.FC = () => {
           <form onSubmit={handleJoin} className="flex flex-col gap-4">
             <div>
               <label htmlFor="pin" className="block text-sm font-medium text-[var(--vn-muted)] mb-2 text-center">
-                Mã phòng (PIN)
+                Mã phòng
               </label>
               <input
                 type="text"

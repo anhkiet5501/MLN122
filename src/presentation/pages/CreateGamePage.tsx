@@ -222,7 +222,7 @@ export const CreateGamePage: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="mb-10 text-center bg-gradient-to-r from-[var(--vn-red)] to-[#B91C1C] rounded-3xl p-6 shadow-2xl shadow-red-900/30 border border-white/20"
           >
-            <p className="text-white/80 font-semibold uppercase tracking-widest text-sm mb-2">Mã phòng (PIN) để người khác tham gia</p>
+            <p className="text-white/80 font-semibold uppercase tracking-widest text-sm mb-2">Mã phòng để người khác tham gia</p>
             <h2 className="text-6xl md:text-8xl font-black text-white tracking-[0.2em] font-mono">{roomId}</h2>
           </motion.div>
         )}

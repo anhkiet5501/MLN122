@@ -129,7 +129,7 @@ export const useGameStore = create<GameStore>()(
               playerId: 'SYSTEM',
               playerName: 'Hệ thống',
               corporationId: 'EVN',
-              message: 'Trò chơi Quốc Gia Cân Bằng bắt đầu! Chúc các CEO may mắn.',
+              message: 'Trò chơi Cán cân Vĩ Mô bắt đầu! Chúc các CEO may mắn.',
               type: 'SYSTEM',
               timestamp: Date.now(),
             },
