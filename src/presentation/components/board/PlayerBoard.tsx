@@ -94,7 +94,7 @@ export const PlayerBoard: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="w-full glass rounded-2xl border border-[var(--vn-gold)] p-4 shadow-[0_0_30px_rgba(244,208,63,0.15)]"
+              className="w-full max-w-md mx-auto glass rounded-2xl border border-[var(--vn-gold)] p-4 shadow-[0_0_30px_rgba(244,208,63,0.15)]"
             >
               <h3 className="text-center text-white font-bold mb-4 uppercase tracking-wider text-sm">
                 Đưa ra quyết định
@@ -106,6 +106,7 @@ export const PlayerBoard: React.FC = () => {
               )}
             </motion.div>
           )}
+
 
           {/* Regular Turn Actions */}
           {game.phase !== 'RESOLVE_EVENT' && (
