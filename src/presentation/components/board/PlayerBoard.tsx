@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
 import { DiceRoller } from './DiceRoller';
@@ -9,9 +9,12 @@ import { ScoringEngine } from '../../../core/engines/ScoringEngine';
 import { getRegionByIndex } from '../../../core/data/regions';
 import { MapPin } from 'lucide-react';
 import { EventCardDisplay } from './EventCard';
+import { VietnamMap } from '../map/VietnamMap';
+import type { RegionId } from '../../../core/domain/types';
 
 export const PlayerBoard: React.FC = () => {
   const game = useGameStore((s) => s.game);
+  const [selectedRegion, setSelectedRegion] = useState<RegionId | null>(null);
   
   // Get player identity from session
   const myCorpId = sessionStorage.getItem('mln122_corp') ?? '';
@@ -68,10 +71,23 @@ export const PlayerBoard: React.FC = () => {
   const currentRegion = game.regions[currentRegionId];
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-56px)] bg-[#0a0f18] p-4 gap-4">
+    <div className="relative flex flex-col min-h-[calc(100vh-56px)] bg-[#0a0f18] p-4 gap-4 overflow-hidden">
       
-      {/* Player Header / Stats */}
-      <div className="glass rounded-2xl p-4 border border-[var(--vn-border)] relative overflow-hidden">
+      {/* Background Map Layer */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <VietnamMap 
+          selectedRegion={selectedRegion} 
+          onRegionClick={
+            game.phase === 'SELECT_ACTION'
+              ? (id) => setSelectedRegion(id === selectedRegion ? null : id)
+              : undefined
+          }
+        />
+      </div>
+
+      <div className="relative z-10 w-full flex-1 flex flex-col gap-4">
+        {/* Player Header / Stats */}
+        <div className="glass rounded-2xl p-4 border border-[var(--vn-border)] relative overflow-hidden">
         {/* Background glow based on turn */}
         {isMyTurn && (
           <div className="absolute inset-0 bg-gradient-to-r from-[var(--vn-red)]/10 to-transparent pointer-events-none" />
@@ -155,14 +171,14 @@ export const PlayerBoard: React.FC = () => {
                   )}
 
                   {game.phase === 'SELECT_ACTION' && (
-                    <div className="w-full glass rounded-2xl border border-[var(--vn-border)] shadow-xl overflow-hidden h-[60vh] flex flex-col">
-                      <ActionPanel selectedRegion={null} />
+                    <div className="w-full glass rounded-2xl border border-[var(--vn-border)] shadow-xl overflow-hidden h-[60vh] flex flex-col relative z-20 pointer-events-auto">
+                      <ActionPanel selectedRegion={selectedRegion} />
                     </div>
                   )}
 
                   {(game.phase === 'DRAW_EVENT' || game.phase === 'END_TURN' || game.phase === 'RESOLVE_MONOPOLY') && (
-                    <div className="w-full glass rounded-2xl border border-[var(--vn-border)] shadow-xl overflow-hidden">
-                      <ActionPanel selectedRegion={null} />
+                    <div className="w-full glass rounded-2xl border border-[var(--vn-border)] shadow-xl overflow-hidden relative z-20 pointer-events-auto">
+                      <ActionPanel selectedRegion={selectedRegion} />
                     </div>
                   )}
 
@@ -222,6 +238,7 @@ export const PlayerBoard: React.FC = () => {
         </AnimatePresence>
       </div>
 
+      </div>
     </div>
   );
 };
