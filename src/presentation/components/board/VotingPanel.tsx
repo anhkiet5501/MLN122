@@ -72,7 +72,7 @@ export const VotingPanel: React.FC<VotingPanelProps> = ({ card, votingSession })
       {/* === Vote Header === */}
       <div className="flex justify-between items-center px-1">
         <div>
-          <p className="text-white font-bold text-xs uppercase tracking-wider">Bỏ phiếu nhóm</p>
+          <p className="text-white font-bold text-sm tracking-wider">Bỏ Phiếu</p>
           <p className="text-[var(--vn-muted)] text-[10px]">
             {totalVoted}/{totalPlayers} người đã bỏ phiếu
           </p>
