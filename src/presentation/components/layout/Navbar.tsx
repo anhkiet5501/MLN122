@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
             ⭐
           </div>
           <span className="font-black text-base text-white tracking-tight">
-            Cán cân <span className="text-[var(--vn-gold)]">Vĩ Mô</span>
+            Cán Cân <span className="text-[var(--vn-gold)]">Vĩ Mô</span>
           </span>
         </Link>
 

@@ -132,7 +132,7 @@ export const RulesPage: React.FC = () => {
         >
           <BookOpen size={40} className="text-[var(--vn-gold)] mx-auto mb-3" />
           <h1 className="text-3xl font-black text-white mb-2">Luật Chơi</h1>
-          <p className="text-[var(--vn-muted)] text-sm">Toàn bộ luật chơi của Cán cân Vĩ Mô</p>
+          <p className="text-[var(--vn-muted)] text-sm">Toàn bộ luật chơi của Cán Cân Vĩ Mô</p>
         </motion.div>
 
         {/* Quick start */}

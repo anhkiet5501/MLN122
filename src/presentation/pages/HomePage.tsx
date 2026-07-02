@@ -30,7 +30,7 @@ export const HomePage: React.FC = () => {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-[var(--vn-gold)] opacity-5 blur-3xl" />
       </div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 w-full max-w-md"
@@ -44,7 +44,7 @@ export const HomePage: React.FC = () => {
           >
             <Globe size={40} className="text-white" />
           </motion.div>
-          <h1 className="text-4xl font-black text-white mb-2">Cán cân Vĩ Mô</h1>
+          <h1 className="text-4xl font-black text-white mb-2">Cán Cân Vĩ Mô</h1>
           <p className="text-[var(--vn-muted)]">Tham gia cuộc chơi kinh tế vĩ mô cùng bạn bè</p>
         </div>
 
@@ -64,7 +64,7 @@ export const HomePage: React.FC = () => {
                 maxLength={8}
               />
             </div>
-            
+
             <button
               type="submit"
               disabled={pin.trim().length < 4}
@@ -88,7 +88,7 @@ export const HomePage: React.FC = () => {
             Tạo phòng chơi mới
           </button>
         </div>
-        
+
         <div className="flex justify-center gap-6 mt-8">
           <button onClick={() => navigate('/rules')} className="text-[var(--vn-muted)] hover:text-white text-sm font-medium transition-colors">
             Cách chơi
