@@ -103,15 +103,15 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({ selectedRegion }) => {
 
 
   return (
-    <div className="glass rounded-xl overflow-hidden border border-[var(--vn-border)]">
-      <div className="p-3 border-b border-[var(--vn-border)]">
+    <div className="glass rounded-xl overflow-hidden border border-[var(--vn-border)] flex flex-col h-full">
+      <div className="p-3 border-b border-[var(--vn-border)] shrink-0">
         <p className="text-white text-xs font-bold">Chọn Hành Động</p>
         <p className="text-[var(--vn-muted)] text-[10px]">
           Mục tiêu: <span className="text-[var(--vn-gold)]">{currentRegion.name}</span>
         </p>
       </div>
 
-      <div className="p-2 space-y-1.5">
+      <div className="p-2 space-y-1.5 overflow-y-auto flex-1">
         {GAME_ACTIONS.map((action) => {
           let cost = action.moneyCost;
 
@@ -144,12 +144,12 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({ selectedRegion }) => {
                 }
               `}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">{action.icon}</span>
-                  <div>
-                    <p className="text-white text-xs font-semibold">{action.label}</p>
-                    <p className="text-[var(--vn-muted)] text-[10px] leading-tight">{action.description.slice(0, 50)}...</p>
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  <span className="text-base flex-shrink-0">{action.icon}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-white text-xs font-semibold truncate">{action.label}</p>
+                    <p className="text-[var(--vn-muted)] text-[10px] leading-tight break-words">{action.description}</p>
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0 ml-2">
@@ -181,7 +181,7 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({ selectedRegion }) => {
           onClick={skipToNextPhase}
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
-          className="w-full text-center p-2.5 rounded-lg transition-all bg-white/5 hover:bg-white/10 text-[var(--vn-muted)] hover:text-white border border-transparent hover:border-[var(--vn-border)] mt-2"
+          className="w-full text-center p-2.5 rounded-lg transition-all bg-white/5 hover:bg-white/10 text-[var(--vn-muted)] hover:text-white border border-transparent hover:border-[var(--vn-border)] mt-2 shrink-0"
         >
           <span className="text-xs font-bold uppercase tracking-wide">Bỏ Qua / Bỏ Lượt</span>
         </motion.button>
