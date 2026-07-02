@@ -8,6 +8,7 @@ import { BalanceMeter } from '../player/BalanceMeter';
 import { ScoringEngine } from '../../../core/engines/ScoringEngine';
 import { getRegionByIndex } from '../../../core/data/regions';
 import { MapPin } from 'lucide-react';
+import { EventCardDisplay } from './EventCard';
 
 export const PlayerBoard: React.FC = () => {
   const game = useGameStore((s) => s.game);
@@ -119,13 +120,12 @@ export const PlayerBoard: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="w-full max-w-lg mx-auto glass rounded-2xl border border-[var(--vn-gold)] p-4 shadow-[0_0_30px_rgba(244,208,63,0.15)]"
+              className="w-full max-w-lg mx-auto drop-shadow-2xl"
             >
-              {game.activeEvent.votingSession ? (
-                <VotingPanel card={game.activeEvent.card} votingSession={game.activeEvent.votingSession} />
-              ) : (
-                <div className="text-center text-[var(--vn-muted)]">Su kien nay khong yeu cau bieu quyet.</div>
-              )}
+              <EventCardDisplay 
+                card={game.activeEvent.card} 
+                resolved={game.activeEvent.resolved} 
+              />
             </motion.div>
           )}
 

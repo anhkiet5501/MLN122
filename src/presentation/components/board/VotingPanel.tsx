@@ -68,25 +68,6 @@ export const VotingPanel: React.FC<VotingPanelProps> = ({ card, votingSession })
 
   return (
     <div className="flex flex-col gap-3">
-      {/* === Card Context === */}
-      <div
-        className="rounded-xl p-3 border"
-        style={{ borderColor: categoryColor + "55", background: categoryColor + "0D" }}
-      >
-        <div className="flex items-center gap-2 mb-1.5">
-          <span className="text-xl">{card.icon}</span>
-          <div>
-            <span
-              className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded mr-1"
-              style={{ color: categoryColor, background: categoryColor + "22" }}
-            >
-              {categoryLabel}
-            </span>
-            <span className="text-white font-bold text-sm">{card.title}</span>
-          </div>
-        </div>
-        <p className="text-[var(--vn-muted)] text-xs leading-relaxed">{card.description}</p>
-      </div>
 
       {/* === Vote Header === */}
       <div className="flex justify-between items-center px-1">
