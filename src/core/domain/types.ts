@@ -25,7 +25,6 @@ export type TurnPhase =
   | 'GAME_OVER';
 
 export type ActionType =
-  | 'INVEST'
   | 'UPGRADE_REGION'
   | 'BUILD_INFRASTRUCTURE'
   | 'SUPPORT_REMOTE_AREA'

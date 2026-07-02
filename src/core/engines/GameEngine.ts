@@ -74,7 +74,7 @@ export class GameEngine {
         moneyGain = Math.floor(region.revenueValue * 0.3);
       }
 
-      if (actionType === 'INVEST' || actionType === 'ACQUIRE_RESOURCE' || actionType === 'BUILD_INFRASTRUCTURE') {
+      if (actionType === 'ACQUIRE_RESOURCE' || actionType === 'BUILD_INFRASTRUCTURE') {
         updatedRegions[targetRegionId] = { ...region, owner: activeCorp.id };
         if (!newOwnedRegions.includes(targetRegionId)) {
           newOwnedRegions.push(targetRegionId);

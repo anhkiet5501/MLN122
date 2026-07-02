@@ -2,16 +2,6 @@ import type { GameAction, ActionType } from '../domain/types';
 
 export const GAME_ACTIONS: GameAction[] = [
   {
-    type: 'INVEST' as ActionType,
-    label: 'Đầu Tư',
-    description: 'Bơm vốn vào một khu vực để tạo lợi nhuận trong tương lai và khẳng định quyền sở hữu.',
-    icon: '💹',
-    moneyCost: 50,
-    missionDelta: 5,
-    efficiencyDelta: 10,
-    requiresRegion: true,
-  },
-  {
     type: 'UPGRADE_REGION' as ActionType,
     label: 'Nâng Cấp Khu Vực',
     description: 'Cải thiện mức độ phát triển của một khu vực đang sở hữu để tăng doanh thu.',

@@ -125,7 +125,7 @@ export const IncomeSummaryModal: React.FC<Props> = ({ summaries, onDismiss }) =>
                 {summary.corporationName} chưa sở hữu khu vực nào.
               </p>
               <p style={{ margin: '8px 0 0', fontSize: '12px' }}>
-                Đầu tư vào khu vực để bắt đầu thu nhập!
+                Xây dựng hoặc thu mua tài nguyên để sở hữu khu vực và có thu nhập!
               </p>
             </div>
           ) : (
