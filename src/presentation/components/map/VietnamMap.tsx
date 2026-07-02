@@ -50,22 +50,28 @@ export const VietnamMap: React.FC<VietnamMapProps> = ({ onRegionClick, selectedR
   // Vietnam SVG paths (stylized board game representation)
   const regionShapes = [
     {
-      id: 'NORTHERN_MOUNTAINS' as RegionId,
-      label: 'Núi Phía Bắc',
+      id: 'NORTHERN_MIDLANDS' as RegionId,
+      label: 'Trung Du & Miền Núi Phía Bắc',
       d: 'M 40 30 L 80 20 L 115 35 L 120 65 L 95 80 L 60 75 L 38 55 Z',
       cx: 79, cy: 50,
     },
     {
-      id: 'HANOI' as RegionId,
-      label: 'Hà Nội',
+      id: 'RED_RIVER_DELTA' as RegionId,
+      label: 'Đồng Bằng Sông Hồng',
       d: 'M 95 80 L 120 65 L 150 72 L 155 100 L 130 118 L 100 110 Z',
       cx: 125, cy: 92,
     },
     {
-      id: 'DA_NANG' as RegionId,
-      label: 'Đà Nẵng',
+      id: 'NORTH_CENTRAL' as RegionId,
+      label: 'Bắc Trung Bộ',
       d: 'M 145 145 L 175 138 L 195 155 L 188 180 L 160 185 L 142 168 Z',
       cx: 168, cy: 162,
+    },
+    {
+      id: 'SOUTH_CENTRAL' as RegionId,
+      label: 'Nam Trung Bộ',
+      d: 'M 162 200 L 195 190 L 215 210 L 205 240 L 175 245 L 158 222 Z',
+      cx: 186, cy: 218,
     },
     {
       id: 'CENTRAL_HIGHLANDS' as RegionId,
@@ -74,28 +80,16 @@ export const VietnamMap: React.FC<VietnamMapProps> = ({ onRegionClick, selectedR
       cx: 135, cy: 203,
     },
     {
-      id: 'COASTAL_REGION' as RegionId,
-      label: 'Duyên Hải',
-      d: 'M 162 200 L 195 190 L 215 210 L 205 240 L 175 245 L 158 222 Z',
-      cx: 186, cy: 218,
+      id: 'SOUTHEAST' as RegionId,
+      label: 'Đông Nam Bộ',
+      d: 'M 143 265 L 178 255 L 198 275 L 190 305 L 155 312 L 138 290 Z',
+      cx: 168, cy: 284,
     },
     {
       id: 'MEKONG_DELTA' as RegionId,
       label: 'ĐB. Sông Cửu Long',
       d: 'M 95 290 L 135 280 L 155 300 L 148 330 L 110 338 L 88 318 Z',
       cx: 122, cy: 309,
-    },
-    {
-      id: 'HO_CHI_MINH' as RegionId,
-      label: 'TP. Hồ Chí Minh',
-      d: 'M 143 265 L 178 255 L 198 275 L 190 305 L 155 312 L 138 290 Z',
-      cx: 168, cy: 284,
-    },
-    {
-      id: 'ISLANDS' as RegionId,
-      label: 'Biển Đảo',
-      d: 'M 240 310 L 270 302 L 285 322 L 275 345 L 245 350 L 232 332 Z',
-      cx: 258, cy: 326,
     },
   ];
 

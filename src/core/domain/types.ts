@@ -5,14 +5,13 @@
 export type CorporationId = 'EVN' | 'PETROVIETNAM' | 'VIETTEL' | 'VINACOMIN';
 
 export type RegionId =
-  | 'HANOI'
-  | 'HO_CHI_MINH'
-  | 'DA_NANG'
-  | 'MEKONG_DELTA'
+  | 'RED_RIVER_DELTA'
+  | 'NORTHERN_MIDLANDS'
+  | 'NORTH_CENTRAL'
+  | 'SOUTH_CENTRAL'
   | 'CENTRAL_HIGHLANDS'
-  | 'NORTHERN_MOUNTAINS'
-  | 'COASTAL_REGION'
-  | 'ISLANDS';
+  | 'SOUTHEAST'
+  | 'MEKONG_DELTA';
 
 export type TurnPhase =
   | 'WAITING'
