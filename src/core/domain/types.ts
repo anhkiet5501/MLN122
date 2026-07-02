@@ -63,6 +63,7 @@ export interface Region {
   svgPath: string;
   svgCenter: { x: number; y: number };
   type: 'URBAN' | 'RURAL' | 'COASTAL' | 'HIGHLAND' | 'ISLAND';
+  description: string;
 }
 
 // ─── Event Card ──────────────────────────────────────────────

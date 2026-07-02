@@ -6,6 +6,8 @@ import { ActionPanel } from './ActionPanel';
 import { VotingPanel } from './VotingPanel';
 import { BalanceMeter } from '../player/BalanceMeter';
 import { ScoringEngine } from '../../../core/engines/ScoringEngine';
+import { getRegionByIndex } from '../../../core/data/regions';
+import { MapPin } from 'lucide-react';
 
 export const PlayerBoard: React.FC = () => {
   const game = useGameStore((s) => s.game);
@@ -60,6 +62,9 @@ export const PlayerBoard: React.FC = () => {
     'CSR Director': 'bg-green-700/80 text-white',
     'Strategy Director': 'bg-orange-600/80 text-white',
   };
+
+  const currentRegionId = getRegionByIndex(myCorp.position);
+  const currentRegion = game.regions[currentRegionId];
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-56px)] bg-[#0a0f18] p-4 gap-4">
@@ -171,9 +176,27 @@ export const PlayerBoard: React.FC = () => {
                   )}
 
                   {game.phase === 'SELECT_ACTION' && game.diceValue && (
-                    <p className="text-center text-xs text-[var(--vn-muted)]">
-                      Kết quả xúc xắc: <span className="text-[var(--vn-gold)] font-bold">{game.diceValue}</span>
-                    </p>
+                    <div className="glass rounded-xl p-4 border border-[var(--vn-border)] shadow-md text-left">
+                      <div className="flex justify-between items-start mb-2">
+                         <div className="flex items-center gap-2">
+                           <MapPin size={18} className="text-[var(--vn-gold)]" />
+                           <h4 className="font-bold text-white text-sm">Bạn đã đến: <span className="text-[var(--vn-gold)]">{currentRegion.name}</span></h4>
+                         </div>
+                         <div className="text-[10px] text-[var(--vn-muted)] bg-white/5 px-2 py-0.5 rounded">
+                           Xúc xắc: {game.diceValue}
+                         </div>
+                      </div>
+                      {currentRegion.description && (
+                        <p className="text-[var(--vn-muted)] text-[11px] leading-relaxed italic mb-2">
+                          "{currentRegion.description}"
+                        </p>
+                      )}
+                      <div className="flex gap-3 text-[10px] font-medium border-t border-[var(--vn-border)] pt-2 mt-2">
+                         <span className="text-[var(--vn-gold)]">Doanh thu: ${currentRegion.revenueValue}</span>
+                         <span className="text-green-400">Sứ mệnh: {currentRegion.missionValue}</span>
+                         <span className="text-[var(--vn-muted)]">Cấp độ: {currentRegion.developmentLevel}</span>
+                      </div>
+                    </div>
                   )}
                 </motion.div>
               ) : (

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useGameStore } from "../../store/gameStore";
 import type { EventCard as EventCardType, VotingSession } from "../../../core/domain/types";
@@ -91,9 +91,9 @@ export const VotingPanel: React.FC<VotingPanelProps> = ({ card, votingSession })
       {/* === Vote Header === */}
       <div className="flex justify-between items-center px-1">
         <div>
-          <p className="text-white font-bold text-xs uppercase tracking-wider">Bop Phieu Nhom</p>
+          <p className="text-white font-bold text-xs uppercase tracking-wider">Bỏ phiếu nhóm</p>
           <p className="text-[var(--vn-muted)] text-[10px]">
-            {totalVoted}/{totalPlayers} nguoi da bop phieu
+            {totalVoted}/{totalPlayers} người đã bỏ phiếu
           </p>
         </div>
         <div
@@ -227,7 +227,7 @@ export const VotingPanel: React.FC<VotingPanelProps> = ({ card, votingSession })
                         : "bg-white/10 hover:bg-white/20 text-white border border-[var(--vn-border)]"
                     }`}
                   >
-                    {isMyChoice ? "Ban da chon" : myVoted ? "Da bop phieu" : "Chon dap an nay"}
+                    {isMyChoice ? "Bạn đã chọn" : myVoted ? "Đã bỏ phiếu" : "Chọn đáp án này"}
                   </motion.button>
                 )}
               </div>
@@ -239,12 +239,12 @@ export const VotingPanel: React.FC<VotingPanelProps> = ({ card, votingSession })
       {/* Footer */}
       <p className="text-center text-[10px] text-[var(--vn-muted)]">
         {totalVoted >= totalPlayers
-          ? "Tat ca da bop phieu - dang tong ket..."
+          ? "Tất cả đã bỏ phiếu - đang tổng kết..."
           : myVoted
-          ? `Ban da bop phieu. Cho ${totalPlayers - totalVoted} nguoi con lai...`
+          ? `Bạn đã bỏ phiếu. Chờ ${totalPlayers - totalVoted} người còn lại...`
           : myPlayer
-          ? "Hay bop phieu cho dap an cua ban!"
-          : "Dang cho nhom bop phieu..."}
+          ? "Hãy bỏ phiếu cho đáp án của bạn!"
+          : "Đang chờ nhóm bỏ phiếu..."}
       </p>
     </div>
   );

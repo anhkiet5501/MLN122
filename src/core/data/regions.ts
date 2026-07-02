@@ -11,6 +11,7 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'URBAN',
     svgPath: 'M 160 90 L 190 80 L 210 100 L 195 120 L 165 115 Z',
     svgCenter: { x: 185, y: 100 },
+    description: 'Thủ đô nghìn năm văn hiến — trung tâm chính trị, kinh tế và văn hóa của cả nước. Hà Nội là nơi đặt trụ sở các bộ ngành trung ương, là cửa ngõ phía Bắc với mật độ doanh nghiệp nhà nước cao nhất Việt Nam.',
   },
   HO_CHI_MINH: {
     id: 'HO_CHI_MINH',
@@ -22,6 +23,7 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'URBAN',
     svgPath: 'M 175 390 L 205 380 L 220 400 L 205 420 L 175 415 Z',
     svgCenter: { x: 198, y: 400 },
+    description: 'Đầu tàu kinh tế của Việt Nam — thành phố năng động nhất Đông Nam Á. TP. HCM đóng góp hơn 25% GDP quốc gia với cảng biển tấp nập, khu công nghiệp sầm uất và thị trường tài chính sôi động nhất cả nước.',
   },
   DA_NANG: {
     id: 'DA_NANG',
@@ -33,6 +35,7 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'COASTAL',
     svgPath: 'M 185 230 L 215 222 L 228 242 L 210 258 L 182 250 Z',
     svgCenter: { x: 205, y: 240 },
+    description: 'Thành phố đáng sống bên bờ biển — cầu nối miền Trung chiến lược. Đà Nẵng sở hữu cảng nước sâu Tiên Sa, sân bay quốc tế và hành lang kinh tế Đông - Tây nối liền Myan­mar, Lào, Thái Lan ra biển Đông.',
   },
   MEKONG_DELTA: {
     id: 'MEKONG_DELTA',
@@ -44,6 +47,7 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'RURAL',
     svgPath: 'M 140 420 L 175 415 L 178 445 L 155 460 L 132 445 Z',
     svgCenter: { x: 155, y: 438 },
+    description: 'Vựa lúa và trái cây của cả nước — vùng đồng bằng phì nhiêu nhất Đông Nam Á. Mạng lưới kênh rạch chằng chịt nuôi sống hàng triệu nông dân, cung cấp 50% sản lượng lúa và 70% trái cây xuất khẩu của Việt Nam.',
   },
   CENTRAL_HIGHLANDS: {
     id: 'CENTRAL_HIGHLANDS',
@@ -55,6 +59,7 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'HIGHLAND',
     svgPath: 'M 145 290 L 180 282 L 192 310 L 170 328 L 142 318 Z',
     svgCenter: { x: 167, y: 305 },
+    description: 'Mái nhà Đông Dương — vùng đất đỏ bazan huyền thoại. Tây Nguyên chiếm 90% sản lượng cà phê xuất khẩu của Việt Nam, đồng thời ẩn chứa trữ lượng bô-xít khổng lồ và rừng nguyên sinh đầu nguồn.',
   },
   NORTHERN_MOUNTAINS: {
     id: 'NORTHERN_MOUNTAINS',
@@ -66,6 +71,7 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'HIGHLAND',
     svgPath: 'M 110 40 L 160 30 L 165 65 L 155 85 L 108 80 Z',
     svgCenter: { x: 138, y: 57 },
+    description: 'Vùng biên viễn cương xa xôi — nơi đời sống còn nhiều gian khó. Núi Phía Bắc là nơi sinh sống của hàng chục dân tộc thiểu số với hạ tầng thưa thớt, nhưng ẩn chứa nguồn khoáng sản quý và tiềm năng du lịch sinh thái to lớn.',
   },
   COASTAL_REGION: {
     id: 'COASTAL_REGION',
@@ -77,6 +83,7 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'COASTAL',
     svgPath: 'M 210 330 L 240 320 L 255 348 L 235 365 L 205 355 Z',
     svgCenter: { x: 230, y: 342 },
+    description: 'Dải đất hẹp ven biển miền Trung — nơi giao thoa giữa biển cả và núi rừng. Vùng Duyên Hải nổi tiếng với nghề đánh cá, nuôi trồng thủy hải sản và các khu kinh tế ven biển đang trỗi dậy mạnh mẽ.',
   },
   ISLANDS: {
     id: 'ISLANDS',
@@ -88,8 +95,10 @@ export const INITIAL_REGIONS: Record<RegionId, Region> = {
     type: 'ISLAND',
     svgPath: 'M 280 360 L 305 352 L 315 372 L 298 385 L 276 378 Z',
     svgCenter: { x: 296, y: 369 },
+    description: 'Vùng biển chủ quyền thiêng liêng — tiền đồn quốc gia trên Biển Đông. Biển Đảo Việt Nam bao gồm Hoàng Sa, Trường Sa và hàng nghìn đảo lớn nhỏ, là nguồn tài nguyên hải sản và dầu khí chiến lược vô giá.',
   },
 };
+
 
 export const REGION_ORDER: RegionId[] = [
   'NORTHERN_MOUNTAINS',
