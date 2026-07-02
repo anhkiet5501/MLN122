@@ -19,8 +19,17 @@ import { AIEngine } from '../../core/engines/AIEngine';
 const PLAYER_COLORS = ['#E63946', '#F4D03F', '#22C55E', '#3B82F6'];
 
 // Initialize Liveblocks Client
+const LIVEBLOCKS_KEY = import.meta.env.VITE_LIVEBLOCKS_PUBLIC_KEY as string;
+
+if (!LIVEBLOCKS_KEY) {
+  console.error(
+    '[MLN122] Missing VITE_LIVEBLOCKS_PUBLIC_KEY environment variable.\n' +
+    'Add it to your .env file (local) or Vercel Environment Variables (production).'
+  );
+}
+
 export const client = createClient({
-  publicApiKey: import.meta.env.VITE_LIVEBLOCKS_PUBLIC_KEY as string,
+  publicApiKey: LIVEBLOCKS_KEY ?? 'MISSING_KEY',
 });
 
 interface GameStore {
