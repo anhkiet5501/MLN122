@@ -48,6 +48,19 @@ export const PlayerBoard: React.FC = () => {
   const isMyTurn = activeCorp.id === myCorp.id;
   const finalScore = ScoringEngine.calculateFinalScore(myCorp);
 
+  // Find current user's player object to show their role
+  const myPlayer = myCorp.players.find(
+    p => p.name.trim().toLowerCase() === myName?.trim().toLowerCase()
+  );
+
+  const ROLE_COLORS: Record<string, string> = {
+    CEO: 'bg-[var(--vn-gold)] text-black',
+    CFO: 'bg-blue-600/80 text-white',
+    COO: 'bg-purple-600/80 text-white',
+    'CSR Director': 'bg-green-700/80 text-white',
+    'Strategy Director': 'bg-orange-600/80 text-white',
+  };
+
   return (
     <div className="flex flex-col min-h-[calc(100vh-56px)] bg-[#0a0f18] p-4 gap-4">
       
@@ -67,7 +80,14 @@ export const PlayerBoard: React.FC = () => {
           </div>
           
           <div className="flex-1">
-            <h2 className="text-white font-black text-xl mb-1">{myCorp.corporation.name}</h2>
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <h2 className="text-white font-black text-xl">{myCorp.corporation.name}</h2>
+              {myPlayer && (
+                <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${ROLE_COLORS[myPlayer.role] ?? 'bg-white/10 text-white'}`}>
+                  {myPlayer.role}
+                </span>
+              )}
+            </div>
             <div className="flex gap-4 text-xs font-bold">
               <span className="text-[var(--vn-gold)] text-lg">${myCorp.money}</span>
               <div className="flex flex-col text-[10px] text-[var(--vn-muted)]">

@@ -59,25 +59,35 @@ export const CreateGamePage: React.FC = () => {
     setCorporations((prev) => prev.map((p, i) => (i === index ? { ...p, ...updates } : p)));
   };
 
+  const OTHER_ROLES: TeamRole[] = ['CFO', 'COO', 'CSR Director', 'Strategy Director'];
+
   const handleHostStart = () => {
-    // Map connected players (from others and myPresence) to the active corporations
     const realActiveCorps = activeCorps.map(corpConfig => {
-      // Find someone who selected this corporation in others
-      const otherPlayer = others.find(o => o.presence?.corporationId === corpConfig.corporationId);
-      
-      let players = corpConfig.players;
-      
-      if (otherPlayer && otherPlayer.presence?.name) {
-        players = [{ name: String(otherPlayer.presence.name), role: 'CEO' }];
-      } else if (myPresence.corporationId === corpConfig.corporationId && myPresence.name) {
-        // If the host is playing this corp
-        players = [{ name: String(myPresence.name), role: 'CEO' }];
+      // Collect ALL players who joined this corp (from all connected presences)
+      const corpPlayers = others
+        .filter(o => o.presence?.corporationId === corpConfig.corporationId && o.presence?.name)
+        .map(o => ({ name: String(o.presence!.name) }));
+
+      if (corpPlayers.length === 0) {
+        // No real players joined this corp — keep default placeholder
+        return corpConfig;
       }
-      
-      return {
-        ...corpConfig,
-        players
-      };
+
+      // Randomly pick 1 person as CEO (Leader)
+      const ceoIndex = Math.floor(Math.random() * corpPlayers.length);
+
+      // Shuffle remaining roles
+      const shuffledOtherRoles = [...OTHER_ROLES].sort(() => Math.random() - 0.5);
+      let roleSlot = 0;
+
+      const players: Array<{ name: string; role: TeamRole }> = corpPlayers.map((p, i) => {
+        if (i === ceoIndex) return { name: p.name, role: 'CEO' as TeamRole };
+        const role = shuffledOtherRoles[roleSlot % shuffledOtherRoles.length] as TeamRole;
+        roleSlot++;
+        return { name: p.name, role };
+      });
+
+      return { ...corpConfig, players };
     });
 
     const config: CreateGameConfig = {
@@ -133,27 +143,37 @@ export const CreateGamePage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[var(--vn-muted)] mb-2">Chọn Tập đoàn</label>
+                <label className="block text-sm font-medium text-[var(--vn-muted)] mb-2">Chọn Tập đoàn (tối đa 7 người/đội)</label>
                 <div className="grid grid-cols-2 gap-2">
                   {CORPORATIONS.map(corp => {
                     const isSelected = selectedCorp === corp.id;
-                    const isTakenByOther = others.some(o => o.presence?.corporationId === corp.id);
+                    // Count how many others joined this corp
+                    const joinedCount = others.filter(o => o.presence?.corporationId === corp.id).length;
+                    const displayCount = joinedCount + (isSelected ? 1 : 0);
+                    const MAX_PER_CORP = 7;
+                    const isFull = !isSelected && displayCount >= MAX_PER_CORP;
 
                     return (
                       <button
                         key={corp.id}
-                        onClick={() => !isTakenByOther && setSelectedCorp(corp.id as CorporationId)}
-                        disabled={isTakenByOther}
+                        onClick={() => !isFull && setSelectedCorp(corp.id as CorporationId)}
+                        disabled={isFull}
                         className={`p-3 rounded-xl border transition-all text-left flex flex-col items-center ${
                           isSelected
                             ? 'border-[var(--vn-gold)] bg-[var(--vn-gold)]/20 text-white shadow-[0_0_15px_rgba(244,208,63,0.3)]'
-                            : isTakenByOther
+                            : isFull
                             ? 'border-transparent opacity-30 cursor-not-allowed'
                             : 'border-[var(--vn-border)] text-[var(--vn-muted)] hover:border-white/30'
                         }`}
                       >
                         <span className="text-2xl mb-1">{corp.icon}</span>
                         <span className="text-xs font-bold text-center mt-1">{corp.name}</span>
+                        <span className={`text-[9px] mt-1 font-bold ${
+                          isSelected ? 'text-[var(--vn-gold)]' : 'text-[var(--vn-muted)]'
+                        }`}>
+                          {displayCount > 0 ? `${displayCount}/${MAX_PER_CORP} người` : `0/${MAX_PER_CORP}`}
+                        </span>
+                        {isFull && <span className="text-[9px] text-red-400 font-bold">Đầy</span>}
                       </button>
                     );
                   })}

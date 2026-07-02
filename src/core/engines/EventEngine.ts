@@ -70,8 +70,11 @@ export class EventEngine {
   }
 
   /**
-   * Resolves the voting session when time expires or early resolution is triggered.
-   * If tied, the CEO's vote wins. If no CEO vote or still tied, random or default.
+   * Resolves the voting session using majority vote.
+   * - Count votes per choice (0=A, 1=B)
+   * - Whichever has more votes wins
+   * - Tie → CEO/Leader vote wins
+   * - No votes at all → random
    */
   static resolveVoting(state: GameState): GameState {
     if (state.phase !== 'RESOLVE_EVENT' || !state.activeEvent || !state.activeEvent.votingSession || state.activeEvent.votingSession.resolved) {
@@ -80,15 +83,29 @@ export class EventEngine {
 
     const votes = state.activeEvent.votingSession.votes;
     const activeCorp = state.corporations[state.activeCorporationIndex];
-    
-    const ceo = activeCorp.players.find(p => p.role === 'CEO');
+
+    // Count votes by choice
+    const voteValues = Object.values(votes);
+    const countA = voteValues.filter(v => v === 0).length;
+    const countB = voteValues.filter(v => v === 1).length;
+
     let finalChoice: 0 | 1;
 
-    if (ceo && votes[ceo.id] !== undefined) {
-      finalChoice = votes[ceo.id] as 0 | 1;
+    if (countA > countB) {
+      // Majority chose A
+      finalChoice = 0;
+    } else if (countB > countA) {
+      // Majority chose B
+      finalChoice = 1;
     } else {
-      // Nếu CEO không chọn (hết giờ), chọn ngẫu nhiên
-      finalChoice = Math.random() > 0.5 ? 0 : 1;
+      // Tie or no votes: CEO/Leader breaks the tie
+      const ceo = activeCorp.players.find(p => p.role === 'CEO');
+      if (ceo && votes[ceo.id] !== undefined) {
+        finalChoice = votes[ceo.id] as 0 | 1;
+      } else {
+        // No CEO vote either → random
+        finalChoice = Math.random() > 0.5 ? 0 : 1;
+      }
     }
 
     const stateWithResolvedVote = {
