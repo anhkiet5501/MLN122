@@ -208,6 +208,7 @@ export class GameService {
         activeEvent: null,
         activeMonopoly: null,
         activePolicies: nextPolicies,
+        actionDeadline: Date.now() + (state.discussionTimer || 30) * 1000,
       };
 
       if (nextTurn > state.maxTurns) {
@@ -238,6 +239,7 @@ export class GameService {
       activeMonopoly: null,
       activePolicies: nextPolicies,
       activeIncomeSummary,
+      actionDeadline: Date.now() + (state.discussionTimer || 30) * 1000,
     };
 
     if (nextTurn > state.maxTurns) {

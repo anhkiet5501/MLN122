@@ -34,12 +34,33 @@ export const CreateGamePage: React.FC = () => {
   const [myPresence, updateMyPresence] = useMyPresence();
   const others = useOthers();
 
+  useEffect(() => {
+    if (isHost) {
+      updateMyPresence({ role: 'HOST' });
+    }
+  }, [isHost, updateMyPresence]);
+
+  const [isRoomValid, setIsRoomValid] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (isHost) {
+      setIsRoomValid(true);
+      return;
+    }
+    // For players, wait 2 seconds to see if a host is present
+    const timer = setTimeout(() => {
+      const hasHost = others.some((other) => other.presence?.role === 'HOST');
+      setIsRoomValid(hasHost);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [isHost, others]);
+
   // Host state
   const [playerCount, setPlayerCount] = useState(2);
   const [mode, setMode] = useState<GameMode>('HOTSEAT');
   const [aiDifficulty, setAIDifficulty] = useState<AIDifficulty>('EASY');
   const [maxTurns, setMaxTurns] = useState(5);
-  const [discussionTimer, setDiscussionTimer] = useState(60);
+  const [discussionTimer, setDiscussionTimer] = useState(30);
   const [corporations, setCorporations] = useState<CorpConfig[]>([
     { corporationId: 'EVN', isAI: false, players: [{ name: 'Người chơi 1', role: 'CEO' }] },
     { corporationId: 'PETROVIETNAM', isAI: false, players: [{ name: 'Người chơi 2', role: 'CEO' }] },
@@ -117,6 +138,29 @@ export const CreateGamePage: React.FC = () => {
   // PLAYER VIEW
   // -------------------------------------------------------------
   if (!isHost) {
+    if (isRoomValid === false) {
+      return (
+        <main className="min-h-[calc(100vh-56px)] px-4 flex flex-col items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full max-w-md glass p-8 rounded-3xl border border-red-500/30 shadow-2xl text-center"
+          >
+            <h1 className="text-2xl font-black text-red-500 mb-4">Phòng không tồn tại</h1>
+            <p className="text-[var(--vn-muted)] mb-8">
+              Mã phòng bạn nhập không đúng hoặc chủ phòng đã thoát. Vui lòng kiểm tra lại.
+            </p>
+            <button
+              onClick={() => navigate('/')}
+              className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 font-bold transition-colors"
+            >
+              Quay lại Trang Chủ
+            </button>
+          </motion.div>
+        </main>
+      );
+    }
+
     return (
       <main className="min-h-[calc(100vh-56px)] px-4 py-8 flex flex-col items-center justify-center">
         <motion.div
@@ -129,7 +173,14 @@ export const CreateGamePage: React.FC = () => {
             <p className="text-[var(--vn-muted)]">Hãy chọn tên và tập đoàn của bạn</p>
           </div>
 
-          {!isReady ? (
+          {!isRoomValid && (
+            <div className="text-center p-4">
+              <div className="w-8 h-8 border-4 border-[var(--vn-gold)] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-sm text-[var(--vn-muted)]">Đang kiểm tra phòng...</p>
+            </div>
+          )}
+
+          {isRoomValid && !isReady ? (
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[var(--vn-muted)] mb-2">Tên hiển thị</label>
@@ -189,20 +240,15 @@ export const CreateGamePage: React.FC = () => {
               </button>
             </div>
           ) : (
-            <div className="flex flex-col items-center py-8">
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6"
-              >
-                <CheckCircle2 size={40} className="text-green-500" />
-              </motion.div>
-              <h2 className="text-2xl font-bold text-white mb-2">Đã Sẵn Sàng!</h2>
-              <p className="text-[var(--vn-muted)] text-center">
-                Bạn đã tham gia với tư cách <strong>{playerName}</strong> ({selectedCorp}).<br/>
-                Vui lòng nhìn lên màn hình chính và chờ Máy chủ bắt đầu trận đấu...
-              </p>
-            </div>
+            isRoomValid && isReady && (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 size={32} className="text-green-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Đã sẵn sàng!</h3>
+                <p className="text-[var(--vn-muted)]">Đang chờ chủ phòng bắt đầu trò chơi...</p>
+              </div>
+            )
           )}
         </motion.div>
       </main>

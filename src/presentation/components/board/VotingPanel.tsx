@@ -33,18 +33,8 @@ export const VotingPanel: React.FC<VotingPanelProps> = ({ card, votingSession })
     (p) => p.name.trim().toLowerCase() === myName?.trim().toLowerCase()
   );
 
-  useEffect(() => {
-    if (!votingSession || votingSession.resolved) return;
-    const interval = setInterval(() => {
-      const remaining = Math.max(0, Math.floor((votingSession.expiresAt - Date.now()) / 1000));
-      setTimeLeft(remaining);
-      if (remaining <= 0) {
-        clearInterval(interval);
-        resolveVoting();
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [votingSession, resolveVoting]);
+  // Timer is now handled globally in HostBoard / TurnPanel
+  // using GameState's actionDeadline.
 
   const votes = votingSession?.votes || {};
   const myVote = myPlayer ? votes[myPlayer.id] : undefined;

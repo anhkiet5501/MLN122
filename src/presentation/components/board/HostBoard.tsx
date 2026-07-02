@@ -13,6 +13,32 @@ export const HostBoard: React.FC = () => {
   const game = useGameStore((s) => s.game);
   const dismissIncomeSummary = useGameStore((s) => s.dismissIncomeSummary);
 
+  React.useEffect(() => {
+    if (!game?.actionDeadline) return;
+
+    const checkTimer = setInterval(() => {
+      const { game: latestGame, rollDice, skipToNextPhase, resolveVoting } = useGameStore.getState();
+      if (!latestGame?.actionDeadline) return;
+      
+      const isExpired = Date.now() >= latestGame.actionDeadline;
+      if (isExpired && latestGame.status === 'PLAYING') {
+        const activeCorp = latestGame.corporations[latestGame.activeCorporationIndex];
+        // AI turns are handled by GameStore's executeAITurn
+        if (activeCorp?.isAI) return;
+
+        if (latestGame.phase === 'ROLL_DICE') {
+          rollDice();
+        } else if (latestGame.phase === 'SELECT_ACTION') {
+          skipToNextPhase();
+        } else if (latestGame.phase === 'RESOLVE_EVENT') {
+          resolveVoting();
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(checkTimer);
+  }, [game?.actionDeadline]);
+
   if (!game) return null;
 
   return (

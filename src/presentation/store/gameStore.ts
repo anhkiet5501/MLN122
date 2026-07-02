@@ -111,6 +111,7 @@ export const useGameStore = create<GameStore>()(
           maxTurns: config.maxTurns,
           discussionTimer: config.discussionTimer,
           phase: 'ROLL_DICE',
+          actionDeadline: Date.now() + 30000,
           regions: { ...INITIAL_REGIONS },
           eventDeck,
           monopolyDeck,

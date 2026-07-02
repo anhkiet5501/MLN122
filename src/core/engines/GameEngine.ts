@@ -32,6 +32,7 @@ export class GameEngine {
       ...newState,
       diceValue,
       phase: 'SELECT_ACTION',
+      actionDeadline: Date.now() + (state.discussionTimer || 30) * 1000,
     };
   }
 

@@ -44,6 +44,7 @@ export class EventEngine {
         }
       },
       phase: 'RESOLVE_EVENT',
+      actionDeadline: Date.now() + timerSeconds * 1000,
     };
   }
 

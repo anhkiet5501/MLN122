@@ -29,22 +29,39 @@ export const Navbar: React.FC = () => {
           </span>
         </Link>
 
-        {/* Nav links */}
         <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map(({ to, label, icon: Icon }) => (
-            <Link
-              key={to}
-              to={to}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                location.pathname === to
-                  ? 'bg-[var(--vn-red)] text-white'
-                  : 'text-[var(--vn-muted)] hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <Icon size={14} />
-              {label}
-            </Link>
-          ))}
+          {navLinks.map(({ to, label, icon: Icon }) => {
+            const inGame = location.pathname.startsWith('/room/');
+            const isActive = location.pathname === to;
+            
+            if (inGame) {
+              return (
+                <div
+                  key={to}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-white/20 cursor-not-allowed"
+                  title="Không thể rời trang khi đang trong trận"
+                >
+                  <Icon size={14} />
+                  {label}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  isActive
+                    ? 'bg-[var(--vn-red)] text-white'
+                    : 'text-[var(--vn-muted)] hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <Icon size={14} />
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right side */}

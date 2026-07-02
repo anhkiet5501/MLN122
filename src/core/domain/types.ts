@@ -213,6 +213,7 @@ export interface GameState {
   turn: number;
   maxTurns: number;
   phase: TurnPhase;
+  actionDeadline?: number;
   regions: Record<RegionId, Region>;
   eventDeck: EventCard[];
   monopolyDeck: MonopolyCard[];

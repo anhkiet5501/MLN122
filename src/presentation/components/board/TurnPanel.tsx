@@ -23,6 +23,23 @@ const PHASE_STEPS = [
 
 export const TurnPanel: React.FC = () => {
   const game = useGameStore((s) => s.game);
+  const [timeLeft, setTimeLeft] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    if (!game?.actionDeadline) {
+      setTimeLeft(null);
+      return;
+    }
+
+    const updateTimer = () => {
+      const remaining = Math.max(0, Math.floor((game.actionDeadline! - Date.now()) / 1000));
+      setTimeLeft(remaining);
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, [game?.actionDeadline]);
 
   if (!game) return null;
 
@@ -57,6 +74,18 @@ export const TurnPanel: React.FC = () => {
             <span className="text-white font-bold text-sm">{game.turn}</span>
             <span className="text-[var(--vn-muted)] text-xs">/ {game.maxTurns}</span>
           </div>
+
+          {timeLeft !== null && (
+            <>
+              <div className="w-px h-8 bg-[var(--vn-border)]" />
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs text-[var(--vn-muted)]">Thời gian:</span>
+                <span className={`text-sm font-black ${timeLeft <= 5 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
+                  {timeLeft}s
+                </span>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Phase stepper */}
