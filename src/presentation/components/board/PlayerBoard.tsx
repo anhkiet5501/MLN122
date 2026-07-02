@@ -176,7 +176,7 @@ export const PlayerBoard: React.FC = () => {
                     </div>
                   )}
 
-                  {(game.phase === 'DRAW_EVENT' || game.phase === 'END_TURN' || game.phase === 'RESOLVE_MONOPOLY') && (
+                  {(game.phase === 'DRAW_EVENT' || game.phase === 'END_TURN') && (
                     <div className="w-full glass rounded-2xl border border-[var(--vn-border)] shadow-xl overflow-hidden relative z-20 pointer-events-auto">
                       <ActionPanel selectedRegion={selectedRegion} />
                     </div>

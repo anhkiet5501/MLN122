@@ -6,9 +6,8 @@ const PHASE_LABELS: Record<string, string> = {
   MOVE: 'Di Chuyển...',
   SELECT_ACTION: 'Chọn Hành Động',
   DRAW_EVENT: 'Rút Thẻ Sự Kiện',
-  RESOLVE_EVENT: 'Giải Quyết Sự Kiện',
-  RESOLVE_MONOPOLY: '⚠️ Nguy Cơ Độc Quyền!',
-  END_TURN: 'Kết Thúc Lượt',
+  RESOLVE_EVENT: '📜 Giải Quyết Sự Kiện',
+  END_TURN: '⏳ Kết Thúc Lượt',
   GAME_OVER: '🏆 Trò Chơi Kết Thúc',
   WAITING: 'Đang Chờ...',
 };

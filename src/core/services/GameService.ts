@@ -70,36 +70,6 @@ export class GameService {
   }
 
   private static postResolveEvent(nextState: GameState, activeCorpId: string): GameState {
-
-    // Check monopoly risk
-    const hasMonopoly = MonopolyEngine.checkMonopolyRisk(nextState, activeCorpId);
-
-    if (hasMonopoly) {
-      let deck = [...nextState.monopolyDeck];
-      let discard = [...nextState.discardedMonopoly];
-      if (deck.length === 0) {
-        deck = shuffleCards([...discard]);
-        discard = [];
-      }
-      const [mCard, ...mRemaining] = deck;
-      const activeCorp = nextState.corporations[nextState.activeCorporationIndex];
-
-      nextState = LogService.addLog(
-        nextState,
-        activeCorpId,
-        `⚠️ NGUY CƠ ĐỘC QUYỀN! ${activeCorp.corporation.name} sở hữu ${Math.round((activeCorp.ownedRegions.length / 8) * 100)}% khu vực!`,
-        'MONOPOLY'
-      );
-
-      return {
-        ...nextState,
-        activeMonopoly: { card: mCard, resolved: false },
-        monopolyDeck: mRemaining,
-        discardedMonopoly: discard,
-        phase: 'RESOLVE_MONOPOLY',
-      };
-    }
-
     return {
       ...nextState,
       phase: 'END_TURN',

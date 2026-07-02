@@ -37,31 +37,7 @@ export const ActionPanel: React.FC<ActionPanelProps> = ({ selectedRegion }) => {
     );
   }
 
-  if (phase === 'RESOLVE_MONOPOLY' && game.activeMonopoly) {
-    const card = game.activeMonopoly.card;
-    return (
-      <div className="glass rounded-xl border border-red-500/50 overflow-hidden">
-        <div className="p-3 bg-red-900/30 border-b border-red-500/30">
-          <p className="text-red-400 font-bold text-sm">⚠️ Nguy Cơ Độc Quyền!</p>
-        </div>
-        <div className="p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-2xl">{card.icon}</span>
-            <h4 className="text-white font-bold text-sm">{card.title}</h4>
-          </div>
-          <p className="text-[var(--vn-muted)] text-xs mb-3">{card.description}</p>
-          <motion.button
-            onClick={resolveMonopolyCard}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm font-bold transition-colors"
-          >
-            Chấp Nhận Hậu Quả
-          </motion.button>
-        </div>
-      </div>
-    );
-  }
+
 
   if (phase === 'DRAW_EVENT') {
     return (
